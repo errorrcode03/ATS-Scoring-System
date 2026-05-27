@@ -1,0 +1,17 @@
+Job Title: Senior Software Engineer (Python)
+
+We are looking for an experienced Senior Software Engineer to join our growing AI team. 
+
+Responsibilities:
+- Design, develop, and deploy scalable machine learning architectures.
+- Write clean, maintainable Python code.
+- Containerize applications using Docker and orchestrate them with Kubernetes.
+- Work with cloud platforms, preferably AWS.
+- Build and maintain REST APIs for ML models.
+
+Requirements:
+- 5+ years of experience in software development.
+- Strong proficiency in Python, SQL, and Git.
+- Experience with Machine Learning frameworks like TensorFlow, PyTorch, or Scikit-learn.
+- Experience with NLP libraries (spaCy, HuggingFace) is a huge plus.
+- Excellent problem-solving skills and ability to work in an agile team.
