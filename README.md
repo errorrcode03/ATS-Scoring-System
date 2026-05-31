@@ -71,10 +71,4 @@ The script will batch process all files, output individual candidate metrics, an
 ### Optional: Enabling AI Generative Feedback
 If you want the system to act as a human recruiter and provide qualitative reviews:
 1. Obtain an API key from Google AI Studio.
-2. Set it as an environment variable on your machine:
-   - **Windows PowerShell**: `$env:GEMINI_API_KEY="your-key-here"`
-   - **Mac/Linux Bash**: `export GEMINI_API_KEY="your-key-here"`
-3. Run `main.py`. The `AIFeedbackLayer` will automatically detect the key and append a review paragraph to the terminal output.
-
-## Technical Documentation
-For a deeper dive into the math and machine learning architecture powering the vector embeddings and similarity engines, refer to the `System_Architecture.pdf` (or `.md`) included in the root directory.
+2. Run `main.py`. The `AIFeedbackLayer` will automatically detect the key and append a review paragraph to the terminal output.
