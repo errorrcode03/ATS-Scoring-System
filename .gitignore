@@ -1,0 +1,33 @@
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Distribution / packaging
+*.egg-info/
+dist/
+build/
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Model weights (downloaded at runtime)
+models/*.bin
+models/*.pt
+models/*.onnx
+
+# Generated PDFs (optional — remove this line if you want to track them)
+System_Architecture.pdf
