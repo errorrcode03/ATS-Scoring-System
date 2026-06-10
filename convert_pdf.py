@@ -1,7 +1,8 @@
+import os
 from markdown_pdf import MarkdownPdf, Section
 
 pdf = MarkdownPdf(toc_level=2)
-input_file = "C:/Users/SAYAN/.gemini/antigravity/brain/36b96c92-692e-44ce-b4ae-26b1d867f2cd/system_architecture.md"
+input_file = "system_architecture.md" # Ensure this file exists in your project root
 output_file = "s:/ML/ATS Scoring System/System_Architecture.pdf"
 
 print("Converting...")

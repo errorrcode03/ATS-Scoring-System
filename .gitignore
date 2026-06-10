@@ -29,5 +29,5 @@ models/*.bin
 models/*.pt
 models/*.onnx
 
-# Generated PDFs (optional — remove this line if you want to track them)
+# Generated PDFs
 System_Architecture.pdf
