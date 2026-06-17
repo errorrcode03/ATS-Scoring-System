@@ -86,12 +86,19 @@ def main():
         print(f"Skills Found: {len(resume_data['skills'])}")
         print("-" * 50)
         
+        # Generate Recommendations
+        recs = rec_engine.generate_recommendations(
+            resume_skills=resume_data['skills'],
+            jd_skills=jd_data['skills']
+        )
+
         # Store for ranking later
         results.append({
             "filename": filename,
             "score": score,
             "skills": resume_data['skills'],
             "ats_result": ats_result,
+            "recommendations": recs,
             "text": resume_text
         })
         
@@ -99,14 +106,67 @@ def main():
     print("\n==================================================")
     print("                 FINAL ATS RANKING                ")
     print("==================================================")
-    
+
     # Sort results highest score first
     results.sort(key=lambda x: x['score'], reverse=True)
-    
+
     for rank, res in enumerate(results, 1):
-        print(f"#{rank} | {res['filename']} | Score: {res['score']}")
-        
-    print("\nRun complete. To see detailed recommendations for a specific candidate, you can update main.py to print them.")
+        print(f"#{rank} | {res['filename']} | Score: {res['score']} / 100")
+
+    # ── Detailed Per-Candidate Report ──────────────────────────────────────
+    print("\n")
+    print("==================================================")
+    print("          DETAILED CANDIDATE REPORTS              ")
+    print("==================================================")
+
+    for rank, res in enumerate(results, 1):
+        recs  = res['recommendations']
+        breakdown = res['ats_result']['breakdown']
+
+        print(f"\n{'='*52}")
+        print(f"  RANK #{rank}  |  {res['filename']}")
+        print(f"{'='*52}")
+
+        # ── Score Breakdown ──
+        print(f"\n  FINAL ATS SCORE : {res['score']} / 100")
+        print(f"  {'-'*40}")
+        print(f"  Semantic Similarity Score : {breakdown['semantic_score']:>6.2f} / 100  (weight 50%)")
+        print(f"  Keyword Match Score       : {breakdown['keyword_score']:>6.2f} / 100  (weight 40%)")
+        print(f"  Structure / Length Score  : {breakdown['structure_score']:>6.2f} / 100  (weight 10%)")
+
+        # ── Skills Found ──
+        print(f"\n  SKILLS DETECTED ({len(res['skills'])}) :")
+        if res['skills']:
+            skill_line = ", ".join(sorted(res['skills']))
+            print(f"  {skill_line}")
+        else:
+            print("  None detected.")
+
+        # ── Missing Keywords ──
+        print(f"\n  MISSING KEYWORDS ({len(recs['missing_keywords'])}) :")
+        if recs['missing_keywords']:
+            for kw in sorted(recs['missing_keywords']):
+                print(f"    [x]  {kw}")
+        else:
+            print("    None - full keyword coverage!")
+
+        # ── Bonus Keywords ──
+        print(f"\n  BONUS KEYWORDS ({len(recs['bonus_keywords'])}) :")
+        if recs['bonus_keywords']:
+            for kw in sorted(recs['bonus_keywords']):
+                print(f"    [+]  {kw}")
+        else:
+            print("    None.")
+
+        # ── Actionable Recommendations ──
+        print(f"\n  RECOMMENDATIONS :")
+        for i, tip in enumerate(recs['actionable_feedback'], 1):
+            print(f"    {i}. {tip}")
+
+        print()
+
+    print("==================================================")
+    print("  Run complete.")
     print("==================================================")
 
 if __name__ == "__main__":

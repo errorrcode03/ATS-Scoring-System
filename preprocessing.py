@@ -1,27 +1,11 @@
-"""
-# 2. NLP Preprocessing Module
-Purpose: To clean raw parsed text and prepare it for embedding and analysis.
-ML/NLP Concepts: 
-- Tokenization: Splitting text into words/sentences.
-- Lemmatization: Converting words to their base dictionary form (e.g., 'running' -> 'run').
-- Stopword Removal: Removing common filler words ('and', 'the', 'is') that add no semantic value.
-- Named Entity Recognition (NER): Identifying proper nouns, organizations, or skills.
-
-Architecture: A Spacy-powered NLP pipeline that processes the text.
-Optimization: Using Spacy's C-level backend is extremely fast. We disable unnecessary pipeline components (like 'parser' if we only need 'ner') to speed up processing time by 30-40%.
-"""
 
 import re
 import spacy
 
 class NLPPreprocessor:
     def __init__(self):
-        """
-        Initialize the spaCy English model.
-        Make sure to run: python -m spacy download en_core_web_sm
-        """
+
         try:
-            # We disable parser to speed up processing since we focus on NER and Lemmatization
             self.nlp = spacy.load("en_core_web_sm", disable=["parser"])
         except OSError:
             raise OSError("spaCy model 'en_core_web_sm' not found. Please run: python -m spacy download en_core_web_sm")
@@ -34,12 +18,6 @@ class NLPPreprocessor:
         }
 
     def clean_text(self, text: str) -> str:
-        """
-        Basic regex cleaning.
-        1. Convert to lowercase for uniformity.
-        2. Remove non-alphanumeric characters (keep basic punctuation like . , -).
-        3. Remove extra whitespaces.
-        """
         text = text.lower()
         # Remove URLs
         text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)
@@ -50,11 +28,6 @@ class NLPPreprocessor:
         return text
 
     def extract_skills(self, text: str) -> list:
-        """
-        Extracts skills using a hybrid approach:
-        1. Token-based matching against a predefined skill dictionary.
-        2. (Future improvement): Train a custom NER model to identify "SKILL" entities.
-        """
         doc = self.nlp(text.lower())
         extracted_skills = set()
         

@@ -1,10 +1,3 @@
-"""
-# 6. Recommendation Engine
-Purpose: To analyze the gaps in the candidate's resume and generate actionable insights.
-ML/NLP Concepts:
-- Set Difference: Identifying missing entities that exist in the target (JD) but not in the source (Resume).
-Architecture: Compares extracted entities and generates human-readable feedback templates.
-"""
 
 class RecommendationEngine:
     def __init__(self):

@@ -9,8 +9,8 @@ Optimization: We use `pdfplumber` instead of `PyPDF2` because it handles multi-c
 """
 
 import os
-import pdfplumber
-import docx
+import pdfplumber  # type: ignore
+import docx  # type: ignore
 
 class ResumeParser:
     def __init__(self):
