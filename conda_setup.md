@@ -28,6 +28,18 @@ The `preprocessing.py` module relies on the English language model (`en_core_web
 python -m spacy download en_core_web_sm
 ```
 
+### Step 5: Register the Conda Environment as a Jupyter Kernel
+This makes the `ats_analyzer` environment available inside Jupyter Notebook.
+```bash
+python -m ipykernel install --user --name=ats_analyzer --display-name "ATS Analyzer (Python 3.11)"
+```
+
+### Step 6: Launch Jupyter Notebook
+```bash
+jupyter notebook
+```
+Then open `ATS_Analyzer.ipynb` and select the **"ATS Analyzer (Python 3.11)"** kernel.
+
 ### Optional: Install GPU Support for PyTorch
 If you have an NVIDIA GPU and want faster embedding generation, install PyTorch with CUDA support *before* installing `requirements.txt`:
 ```bash
